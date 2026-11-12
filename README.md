@@ -19,6 +19,38 @@ python3 -m http.server 4173
 
 Then open `http://127.0.0.1:4173`.
 
+## Training experience
+
+- Strength plans A–D, live set progress, focus mode, and adjustable rest timers.
+- A phase-aware BJJ timer with round markers, presets, and full-screen controls.
+- A device logbook with session notes and CSV export.
+- Responsive command center and rankings, with reduced-motion support.
+
+The redesign retains the existing workout-history storage format and account
+integrations. Interface checks can use isolated local fixtures without writing
+training sessions to a real athlete account. Run server/domain checks with
+`npm test`.
+
+## Automatic GitHub deployments
+
+Keep changes in this repository and push releases to `main`. Netlify must have
+the target project connected to `luisvalladolid/iron-dominion`, production branch
+`main`, for each push to create a deployment automatically. The publish directory
+is `.` as declared in `netlify.toml`; leave the build command blank.
+
+Deployment wiring checked on November 12, 2026:
+
+- `iron-dominion-staging` builds from this repository's `main` branch and is
+  protected by team sign-in.
+- `iron-dominion` still publishes an older uploaded build. Connect that existing
+  project under **Project configuration → Build & deploy → Continuous
+  deployment → Link repository** to enable automatic production releases.
+
+Verify that the published Netlify deploy's commit matches the intended GitHub
+commit. Pushing this repository does not update an unconnected upload-only
+project. Retain each project's Identity, database, and environment settings;
+connecting a repository does not copy those between projects.
+
 ## Deploy with athlete accounts
 
 The account and synced-history features use a Netlify Function and Netlify
